@@ -1,0 +1,1 @@
+"""Gatewright: shared domain library."""
