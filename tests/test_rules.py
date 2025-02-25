@@ -19,11 +19,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.log_retention_days(4), 365)
 
     def test_rate_limit_rps(self):
-        self.assertEqual(rules.rate_limit_rps(0), 5)
-        self.assertEqual(rules.rate_limit_rps(1), 5)
-        self.assertEqual(rules.rate_limit_rps(2), 50)
-        self.assertEqual(rules.rate_limit_rps(3), 500)
-        self.assertEqual(rules.rate_limit_rps(4), 5000)
+        self.assertEqual(rules.rate_limit_rps(0), 6)
+        self.assertEqual(rules.rate_limit_rps(1), 6)
+        self.assertEqual(rules.rate_limit_rps(2), 55)
+        self.assertEqual(rules.rate_limit_rps(3), 550)
+        self.assertEqual(rules.rate_limit_rps(4), 5500)
 
     def test_burst_capacity(self):
         self.assertEqual(rules.burst_capacity(0), 10)
