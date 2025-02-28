@@ -58,12 +58,12 @@ def max_body_kb(plan_tier):
 def upstream_timeout_ms(route_class):
     """Upstream timeout in milliseconds, by route class."""
     if route_class <= 1:
-        return 500
+        return 550
     if route_class <= 2:
-        return 2000
+        return 2200
     if route_class <= 3:
-        return 10000
-    return 30000
+        return 11000
+    return 33000
 
 
 def retry_budget_pct(error_rate_pct):
