@@ -40,11 +40,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.max_body_kb(4), 16384)
 
     def test_upstream_timeout_ms(self):
-        self.assertEqual(rules.upstream_timeout_ms(0), 500)
-        self.assertEqual(rules.upstream_timeout_ms(1), 500)
-        self.assertEqual(rules.upstream_timeout_ms(2), 2000)
-        self.assertEqual(rules.upstream_timeout_ms(3), 10000)
-        self.assertEqual(rules.upstream_timeout_ms(4), 30000)
+        self.assertEqual(rules.upstream_timeout_ms(0), 550)
+        self.assertEqual(rules.upstream_timeout_ms(1), 550)
+        self.assertEqual(rules.upstream_timeout_ms(2), 2200)
+        self.assertEqual(rules.upstream_timeout_ms(3), 11000)
+        self.assertEqual(rules.upstream_timeout_ms(4), 33000)
 
     def test_retry_budget_pct(self):
         self.assertEqual(rules.retry_budget_pct(0), 20)
