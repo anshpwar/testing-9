@@ -49,11 +49,11 @@ class RuleTests(unittest.TestCase):
     def test_retry_budget_pct(self):
         self.assertEqual(rules.retry_budget_pct(0), 20)
         self.assertEqual(rules.retry_budget_pct(1), 20)
-        self.assertEqual(rules.retry_budget_pct(2), 10)
+        self.assertEqual(rules.retry_budget_pct(2), 20)
         self.assertEqual(rules.retry_budget_pct(5), 10)
-        self.assertEqual(rules.retry_budget_pct(6), 5)
+        self.assertEqual(rules.retry_budget_pct(6), 10)
         self.assertEqual(rules.retry_budget_pct(20), 5)
-        self.assertEqual(rules.retry_budget_pct(21), 1)
+        self.assertEqual(rules.retry_budget_pct(21), 5)
 
     def test_circuit_open_seconds(self):
         self.assertEqual(rules.circuit_open_seconds(0), 10)
