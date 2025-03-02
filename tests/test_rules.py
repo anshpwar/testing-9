@@ -83,14 +83,14 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.max_headers(4), 281)
 
     def test_ip_block_minutes(self):
-        self.assertEqual(rules.ip_block_minutes(0), 5)
-        self.assertEqual(rules.ip_block_minutes(1), 5)
-        self.assertEqual(rules.ip_block_minutes(3), 5)
-        self.assertEqual(rules.ip_block_minutes(4), 30)
-        self.assertEqual(rules.ip_block_minutes(10), 30)
-        self.assertEqual(rules.ip_block_minutes(11), 240)
-        self.assertEqual(rules.ip_block_minutes(50), 240)
-        self.assertEqual(rules.ip_block_minutes(51), 1440)
+        self.assertEqual(rules.ip_block_minutes(0), 6)
+        self.assertEqual(rules.ip_block_minutes(1), 6)
+        self.assertEqual(rules.ip_block_minutes(3), 6)
+        self.assertEqual(rules.ip_block_minutes(4), 33)
+        self.assertEqual(rules.ip_block_minutes(10), 33)
+        self.assertEqual(rules.ip_block_minutes(11), 264)
+        self.assertEqual(rules.ip_block_minutes(50), 264)
+        self.assertEqual(rules.ip_block_minutes(51), 1584)
 
     def test_webhook_retry_s(self):
         self.assertEqual(rules.webhook_retry_s(0), 10)
