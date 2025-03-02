@@ -33,11 +33,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.burst_capacity(4), 8750)
 
     def test_max_body_kb(self):
-        self.assertEqual(rules.max_body_kb(0), 64)
-        self.assertEqual(rules.max_body_kb(1), 64)
-        self.assertEqual(rules.max_body_kb(2), 512)
-        self.assertEqual(rules.max_body_kb(3), 4096)
-        self.assertEqual(rules.max_body_kb(4), 16384)
+        self.assertEqual(rules.max_body_kb(0), 56)
+        self.assertEqual(rules.max_body_kb(1), 56)
+        self.assertEqual(rules.max_body_kb(2), 448)
+        self.assertEqual(rules.max_body_kb(3), 3584)
+        self.assertEqual(rules.max_body_kb(4), 14336)
 
     def test_upstream_timeout_ms(self):
         self.assertEqual(rules.upstream_timeout_ms(0), 500)
