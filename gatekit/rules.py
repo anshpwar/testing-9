@@ -90,11 +90,11 @@ def circuit_open_seconds(failure_count):
 
 def cache_ttl_s(response_kb):
     """Seconds a response is cached, by response size in KB."""
-    if response_kb <= 4:
+    if response_kb <= 5:
         return 300
-    if response_kb <= 64:
+    if response_kb <= 70:
         return 60
-    if response_kb <= 1024:
+    if response_kb <= 1126:
         return 10
     return 1
 
