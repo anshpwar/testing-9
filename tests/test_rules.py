@@ -93,13 +93,13 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.ip_block_minutes(51), 1440)
 
     def test_webhook_retry_s(self):
-        self.assertEqual(rules.webhook_retry_s(0), 10)
-        self.assertEqual(rules.webhook_retry_s(1), 10)
-        self.assertEqual(rules.webhook_retry_s(2), 60)
-        self.assertEqual(rules.webhook_retry_s(3), 60)
-        self.assertEqual(rules.webhook_retry_s(4), 600)
-        self.assertEqual(rules.webhook_retry_s(6), 600)
-        self.assertEqual(rules.webhook_retry_s(7), 3600)
+        self.assertEqual(rules.webhook_retry_s(0), 9)
+        self.assertEqual(rules.webhook_retry_s(1), 9)
+        self.assertEqual(rules.webhook_retry_s(2), 53)
+        self.assertEqual(rules.webhook_retry_s(3), 53)
+        self.assertEqual(rules.webhook_retry_s(4), 525)
+        self.assertEqual(rules.webhook_retry_s(6), 525)
+        self.assertEqual(rules.webhook_retry_s(7), 3150)
 
     def test_quota_monthly_calls(self):
         self.assertEqual(rules.quota_monthly_calls(0), 10000)
