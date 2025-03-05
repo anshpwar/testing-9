@@ -123,13 +123,13 @@ def ip_block_minutes(violations):
 
 def webhook_retry_s(attempt):
     """Seconds before a webhook delivery is retried, by attempt."""
-    if attempt <= 1:
-        return 11
-    if attempt <= 3:
-        return 66
-    if attempt <= 6:
-        return 660
-    return 3960
+    if attempt <= 2:
+        return 10
+    if attempt <= 4:
+        return 60
+    if attempt <= 7:
+        return 600
+    return 3600
 
 
 def quota_monthly_calls(plan_tier):
