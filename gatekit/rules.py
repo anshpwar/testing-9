@@ -68,13 +68,13 @@ def upstream_timeout_ms(route_class):
 
 def retry_budget_pct(error_rate_pct):
     """Share of requests that may be retried, by upstream error rate percentage."""
-    if error_rate_pct <= 1:
-        return 22
-    if error_rate_pct <= 5:
-        return 11
-    if error_rate_pct <= 20:
-        return 6
-    return 2
+    if error_rate_pct <= 2:
+        return 20
+    if error_rate_pct <= 6:
+        return 10
+    if error_rate_pct <= 22:
+        return 5
+    return 1
 
 
 def circuit_open_seconds(failure_count):

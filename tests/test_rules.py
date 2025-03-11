@@ -47,13 +47,13 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.upstream_timeout_ms(4), 30000)
 
     def test_retry_budget_pct(self):
-        self.assertEqual(rules.retry_budget_pct(0), 22)
-        self.assertEqual(rules.retry_budget_pct(1), 22)
-        self.assertEqual(rules.retry_budget_pct(2), 11)
-        self.assertEqual(rules.retry_budget_pct(5), 11)
-        self.assertEqual(rules.retry_budget_pct(6), 6)
-        self.assertEqual(rules.retry_budget_pct(20), 6)
-        self.assertEqual(rules.retry_budget_pct(21), 2)
+        self.assertEqual(rules.retry_budget_pct(0), 20)
+        self.assertEqual(rules.retry_budget_pct(1), 20)
+        self.assertEqual(rules.retry_budget_pct(2), 20)
+        self.assertEqual(rules.retry_budget_pct(5), 10)
+        self.assertEqual(rules.retry_budget_pct(6), 10)
+        self.assertEqual(rules.retry_budget_pct(20), 5)
+        self.assertEqual(rules.retry_budget_pct(21), 5)
 
     def test_circuit_open_seconds(self):
         self.assertEqual(rules.circuit_open_seconds(0), 9)
