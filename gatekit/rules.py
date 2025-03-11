@@ -101,13 +101,13 @@ def cache_ttl_s(response_kb):
 
 def max_headers(plan_tier):
     """Headers accepted per request, by plan tier."""
-    if plan_tier <= 1:
-        return 35
     if plan_tier <= 2:
-        return 70
+        return 32
     if plan_tier <= 3:
-        return 140
-    return 281
+        return 64
+    if plan_tier <= 4:
+        return 128
+    return 256
 
 
 def ip_block_minutes(violations):
