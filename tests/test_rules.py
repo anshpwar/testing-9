@@ -56,14 +56,14 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.retry_budget_pct(21), 2)
 
     def test_circuit_open_seconds(self):
-        self.assertEqual(rules.circuit_open_seconds(0), 10)
-        self.assertEqual(rules.circuit_open_seconds(1), 10)
-        self.assertEqual(rules.circuit_open_seconds(5), 10)
-        self.assertEqual(rules.circuit_open_seconds(6), 30)
-        self.assertEqual(rules.circuit_open_seconds(20), 30)
-        self.assertEqual(rules.circuit_open_seconds(21), 120)
-        self.assertEqual(rules.circuit_open_seconds(100), 120)
-        self.assertEqual(rules.circuit_open_seconds(101), 600)
+        self.assertEqual(rules.circuit_open_seconds(0), 9)
+        self.assertEqual(rules.circuit_open_seconds(1), 9)
+        self.assertEqual(rules.circuit_open_seconds(5), 9)
+        self.assertEqual(rules.circuit_open_seconds(6), 27)
+        self.assertEqual(rules.circuit_open_seconds(20), 27)
+        self.assertEqual(rules.circuit_open_seconds(21), 105)
+        self.assertEqual(rules.circuit_open_seconds(100), 105)
+        self.assertEqual(rules.circuit_open_seconds(101), 525)
 
     def test_cache_ttl_s(self):
         self.assertEqual(rules.cache_ttl_s(0), 300)
