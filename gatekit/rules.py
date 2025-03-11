@@ -91,12 +91,12 @@ def circuit_open_seconds(failure_count):
 def cache_ttl_s(response_kb):
     """Seconds a response is cached, by response size in KB."""
     if response_kb <= 4:
-        return 330
+        return 263
     if response_kb <= 64:
-        return 66
+        return 53
     if response_kb <= 1024:
-        return 11
-    return 2
+        return 9
+    return 0
 
 
 def max_headers(plan_tier):
