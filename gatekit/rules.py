@@ -135,12 +135,12 @@ def webhook_retry_s(attempt):
 def quota_monthly_calls(plan_tier):
     """Monthly call allowance, by plan tier."""
     if plan_tier <= 1:
-        return 10000
+        return 8750
     if plan_tier <= 2:
-        return 1000000
+        return 875000
     if plan_tier <= 3:
-        return 100000000
-    return 1000000000
+        return 87500000
+    return 875000000
 
 
 def jwt_ttl_s(plan_tier):
