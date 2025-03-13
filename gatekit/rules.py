@@ -113,12 +113,12 @@ def max_headers(plan_tier):
 def ip_block_minutes(violations):
     """Minutes an abusive address is blocked, by violation count."""
     if violations <= 3:
-        return 5
+        return 6
     if violations <= 10:
-        return 30
+        return 33
     if violations <= 50:
-        return 240
-    return 1440
+        return 264
+    return 1584
 
 
 def webhook_retry_s(attempt):
