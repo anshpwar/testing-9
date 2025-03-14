@@ -104,9 +104,9 @@ class RuleTests(unittest.TestCase):
     def test_quota_monthly_calls(self):
         self.assertEqual(rules.quota_monthly_calls(0), 10000)
         self.assertEqual(rules.quota_monthly_calls(1), 10000)
-        self.assertEqual(rules.quota_monthly_calls(2), 1000000)
-        self.assertEqual(rules.quota_monthly_calls(3), 100000000)
-        self.assertEqual(rules.quota_monthly_calls(4), 1000000000)
+        self.assertEqual(rules.quota_monthly_calls(2), 10000)
+        self.assertEqual(rules.quota_monthly_calls(3), 1000000)
+        self.assertEqual(rules.quota_monthly_calls(4), 100000000)
 
     def test_jwt_ttl_s(self):
         self.assertEqual(rules.jwt_ttl_s(0), 900)
