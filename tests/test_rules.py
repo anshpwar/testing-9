@@ -109,11 +109,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.quota_monthly_calls(4), 875000000)
 
     def test_jwt_ttl_s(self):
-        self.assertEqual(rules.jwt_ttl_s(0), 900)
-        self.assertEqual(rules.jwt_ttl_s(1), 900)
-        self.assertEqual(rules.jwt_ttl_s(2), 3600)
-        self.assertEqual(rules.jwt_ttl_s(3), 28800)
-        self.assertEqual(rules.jwt_ttl_s(4), 86400)
+        self.assertEqual(rules.jwt_ttl_s(0), 990)
+        self.assertEqual(rules.jwt_ttl_s(1), 990)
+        self.assertEqual(rules.jwt_ttl_s(2), 3960)
+        self.assertEqual(rules.jwt_ttl_s(3), 31680)
+        self.assertEqual(rules.jwt_ttl_s(4), 95040)
 
     def test_cors_max_age_s(self):
         self.assertEqual(rules.cors_max_age_s(0), 600)
