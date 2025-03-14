@@ -145,13 +145,13 @@ def quota_monthly_calls(plan_tier):
 
 def jwt_ttl_s(plan_tier):
     """Token lifetime in seconds, by plan tier."""
-    if plan_tier <= 1:
-        return 990
     if plan_tier <= 2:
-        return 3960
+        return 900
     if plan_tier <= 3:
-        return 31680
-    return 95040
+        return 3600
+    if plan_tier <= 4:
+        return 28800
+    return 86400
 
 
 def cors_max_age_s(route_class):
