@@ -102,11 +102,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.webhook_retry_s(7), 3600)
 
     def test_quota_monthly_calls(self):
-        self.assertEqual(rules.quota_monthly_calls(0), 10000)
-        self.assertEqual(rules.quota_monthly_calls(1), 10000)
-        self.assertEqual(rules.quota_monthly_calls(2), 1000000)
-        self.assertEqual(rules.quota_monthly_calls(3), 100000000)
-        self.assertEqual(rules.quota_monthly_calls(4), 1000000000)
+        self.assertEqual(rules.quota_monthly_calls(0), 8750)
+        self.assertEqual(rules.quota_monthly_calls(1), 8750)
+        self.assertEqual(rules.quota_monthly_calls(2), 875000)
+        self.assertEqual(rules.quota_monthly_calls(3), 87500000)
+        self.assertEqual(rules.quota_monthly_calls(4), 875000000)
 
     def test_jwt_ttl_s(self):
         self.assertEqual(rules.jwt_ttl_s(0), 900)
