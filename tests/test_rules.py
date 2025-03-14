@@ -116,11 +116,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.jwt_ttl_s(4), 95040)
 
     def test_cors_max_age_s(self):
-        self.assertEqual(rules.cors_max_age_s(0), 600)
-        self.assertEqual(rules.cors_max_age_s(1), 600)
-        self.assertEqual(rules.cors_max_age_s(2), 3600)
-        self.assertEqual(rules.cors_max_age_s(3), 43200)
-        self.assertEqual(rules.cors_max_age_s(4), 86400)
+        self.assertEqual(rules.cors_max_age_s(0), 525)
+        self.assertEqual(rules.cors_max_age_s(1), 525)
+        self.assertEqual(rules.cors_max_age_s(2), 3150)
+        self.assertEqual(rules.cors_max_age_s(3), 37800)
+        self.assertEqual(rules.cors_max_age_s(4), 75600)
 
     def test_ping_interval_s(self):
         self.assertEqual(rules.ping_interval_s(0), 30)

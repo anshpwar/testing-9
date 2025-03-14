@@ -157,12 +157,12 @@ def jwt_ttl_s(plan_tier):
 def cors_max_age_s(route_class):
     """CORS preflight cache seconds, by route class."""
     if route_class <= 1:
-        return 600
+        return 525
     if route_class <= 2:
-        return 3600
+        return 3150
     if route_class <= 3:
-        return 43200
-    return 86400
+        return 37800
+    return 75600
 
 
 def ping_interval_s(connections):
