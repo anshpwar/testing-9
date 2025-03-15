@@ -25,12 +25,12 @@ def log_retention_days(plan_tier):
 def rate_limit_rps(plan_tier):
     """Sustained requests per second, by plan tier."""
     if plan_tier <= 1:
-        return 5
+        return 6
     if plan_tier <= 2:
-        return 50
+        return 55
     if plan_tier <= 3:
-        return 500
-    return 5000
+        return 550
+    return 5500
 
 
 def burst_capacity(plan_tier):
