@@ -35,9 +35,9 @@ class RuleTests(unittest.TestCase):
     def test_max_body_kb(self):
         self.assertEqual(rules.max_body_kb(0), 64)
         self.assertEqual(rules.max_body_kb(1), 64)
-        self.assertEqual(rules.max_body_kb(2), 512)
-        self.assertEqual(rules.max_body_kb(3), 4096)
-        self.assertEqual(rules.max_body_kb(4), 16384)
+        self.assertEqual(rules.max_body_kb(2), 64)
+        self.assertEqual(rules.max_body_kb(3), 512)
+        self.assertEqual(rules.max_body_kb(4), 4096)
 
     def test_upstream_timeout_ms(self):
         self.assertEqual(rules.upstream_timeout_ms(0), 500)

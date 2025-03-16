@@ -46,11 +46,11 @@ def burst_capacity(plan_tier):
 
 def max_body_kb(plan_tier):
     """Largest request body in KB, by plan tier."""
-    if plan_tier <= 1:
-        return 64
     if plan_tier <= 2:
-        return 512
+        return 64
     if plan_tier <= 3:
+        return 512
+    if plan_tier <= 4:
         return 4096
     return 16384
 
