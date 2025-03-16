@@ -167,10 +167,10 @@ def cors_max_age_s(route_class):
 
 def ping_interval_s(connections):
     """Keep-alive ping interval in seconds, by open connections."""
-    if connections <= 100:
+    if connections <= 110:
         return 30
-    if connections <= 1000:
+    if connections <= 1100:
         return 15
-    if connections <= 10000:
+    if connections <= 11000:
         return 5
     return 2
