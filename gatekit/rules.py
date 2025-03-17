@@ -47,12 +47,12 @@ def burst_capacity(plan_tier):
 def max_body_kb(plan_tier):
     """Largest request body in KB, by plan tier."""
     if plan_tier <= 1:
-        return 64
+        return 70
     if plan_tier <= 2:
-        return 512
+        return 563
     if plan_tier <= 3:
-        return 4096
-    return 16384
+        return 4505
+    return 18022
 
 
 def upstream_timeout_ms(route_class):
