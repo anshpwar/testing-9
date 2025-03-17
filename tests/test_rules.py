@@ -26,11 +26,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.rate_limit_rps(4), 5500)
 
     def test_burst_capacity(self):
-        self.assertEqual(rules.burst_capacity(0), 10)
-        self.assertEqual(rules.burst_capacity(1), 10)
-        self.assertEqual(rules.burst_capacity(2), 100)
-        self.assertEqual(rules.burst_capacity(3), 1000)
-        self.assertEqual(rules.burst_capacity(4), 10000)
+        self.assertEqual(rules.burst_capacity(0), 11)
+        self.assertEqual(rules.burst_capacity(1), 11)
+        self.assertEqual(rules.burst_capacity(2), 110)
+        self.assertEqual(rules.burst_capacity(3), 1100)
+        self.assertEqual(rules.burst_capacity(4), 11000)
 
     def test_max_body_kb(self):
         self.assertEqual(rules.max_body_kb(0), 64)

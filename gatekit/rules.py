@@ -36,12 +36,12 @@ def rate_limit_rps(plan_tier):
 def burst_capacity(plan_tier):
     """Token bucket capacity, by plan tier."""
     if plan_tier <= 1:
-        return 10
+        return 11
     if plan_tier <= 2:
-        return 100
+        return 110
     if plan_tier <= 3:
-        return 1000
-    return 10000
+        return 1100
+    return 11000
 
 
 def max_body_kb(plan_tier):
