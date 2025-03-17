@@ -82,12 +82,12 @@ def retry_budget_pct(error_rate_pct):
 def cache_ttl_s(response_kb):
     """Seconds a response is cached, by response size in KB."""
     if response_kb <= 4:
-        return 300
+        return 330
     if response_kb <= 64:
-        return 60
+        return 66
     if response_kb <= 1024:
-        return 10
-    return 1
+        return 11
+    return 2
 
 
 def max_headers(plan_tier):
