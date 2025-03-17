@@ -1,0 +1,19 @@
+{
+  "env": "uat",
+  "finished_at": "2025-03-17T08:55:00+0000",
+  "kind": "deployment",
+  "patch_id": "fd4d559a6212c462bd213b7733d138612d03db9a",
+  "run_id": "dep-r09-0030",
+  "schema_version": 1,
+  "services": [
+    "gateway-edge",
+    "gateway-admin"
+  ],
+  "source": "fixture-deployer",
+  "started_at": "2025-03-17T08:49:00+0000",
+  "status": "SUCCEEDED",
+  "subject_commit": "c56bb3571611a9d5a53cc7fca279461055ece6c7",
+  "suite": "n/a",
+  "suite_digest": "4891fe47b3c89cfba73953fc56c9ce5ef231dc06",
+  "synthetic": true
+}
