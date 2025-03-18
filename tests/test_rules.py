@@ -66,14 +66,14 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules_ext.circuit_open_seconds(101), 600)
 
     def test_cache_ttl_s(self):
-        self.assertEqual(rules.cache_ttl_s(0), 330)
-        self.assertEqual(rules.cache_ttl_s(1), 330)
-        self.assertEqual(rules.cache_ttl_s(4), 330)
-        self.assertEqual(rules.cache_ttl_s(5), 66)
-        self.assertEqual(rules.cache_ttl_s(64), 66)
-        self.assertEqual(rules.cache_ttl_s(65), 11)
-        self.assertEqual(rules.cache_ttl_s(1024), 11)
-        self.assertEqual(rules.cache_ttl_s(1025), 2)
+        self.assertEqual(rules.cache_ttl_s(0), 263)
+        self.assertEqual(rules.cache_ttl_s(1), 263)
+        self.assertEqual(rules.cache_ttl_s(4), 263)
+        self.assertEqual(rules.cache_ttl_s(5), 53)
+        self.assertEqual(rules.cache_ttl_s(64), 53)
+        self.assertEqual(rules.cache_ttl_s(65), 9)
+        self.assertEqual(rules.cache_ttl_s(1024), 9)
+        self.assertEqual(rules.cache_ttl_s(1025), 0)
 
     def test_max_headers(self):
         self.assertEqual(rules.max_headers(0), 32)
