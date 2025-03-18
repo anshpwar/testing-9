@@ -1,6 +1,6 @@
 import unittest
 
-from gatekit import rules
+from gatekit import rules, rules_ext
 
 
 class RuleTests(unittest.TestCase):
@@ -56,14 +56,14 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.retry_budget_pct(21), 1)
 
     def test_circuit_open_seconds(self):
-        self.assertEqual(rules.circuit_open_seconds(0), 10)
-        self.assertEqual(rules.circuit_open_seconds(1), 10)
-        self.assertEqual(rules.circuit_open_seconds(5), 10)
-        self.assertEqual(rules.circuit_open_seconds(6), 30)
-        self.assertEqual(rules.circuit_open_seconds(20), 30)
-        self.assertEqual(rules.circuit_open_seconds(21), 120)
-        self.assertEqual(rules.circuit_open_seconds(100), 120)
-        self.assertEqual(rules.circuit_open_seconds(101), 600)
+        self.assertEqual(rules_ext.circuit_open_seconds(0), 10)
+        self.assertEqual(rules_ext.circuit_open_seconds(1), 10)
+        self.assertEqual(rules_ext.circuit_open_seconds(5), 10)
+        self.assertEqual(rules_ext.circuit_open_seconds(6), 30)
+        self.assertEqual(rules_ext.circuit_open_seconds(20), 30)
+        self.assertEqual(rules_ext.circuit_open_seconds(21), 120)
+        self.assertEqual(rules_ext.circuit_open_seconds(100), 120)
+        self.assertEqual(rules_ext.circuit_open_seconds(101), 600)
 
     def test_cache_ttl_s(self):
         self.assertEqual(rules.cache_ttl_s(0), 300)
