@@ -77,15 +77,6 @@ def retry_budget_pct(error_rate_pct):
     return 1
 
 
-def circuit_open_seconds(failure_count):
-    """Seconds a circuit stays open, by consecutive failure count."""
-    if failure_count <= 5:
-        return 10
-    if failure_count <= 20:
-        return 30
-    if failure_count <= 100:
-        return 120
-    return 600
 
 
 def cache_ttl_s(response_kb):
