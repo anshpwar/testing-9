@@ -1,0 +1,64 @@
+scenario_id: S065
+repo_id: testing-9
+title: Reverted change re-applied by cherry-pick
+difficulty: 2
+primary_catalog_id: 65
+catalog_ids:
+- 65
+expected_git_outcome: CONFLICT
+merge_pair:
+  base: scenario/S065/base
+  target: scenario/S065/target
+  all_pairs:
+  - - scenario/S065/base
+    - scenario/S065/target
+  additional_sides: {}
+fork_commit: '@S065.F'
+expected_conflicted_files:
+- gatekit/rules.py
+- tests/test_rules.py
+validation_method: merge
+clone_profile: full
+branches:
+- scenario/S065/base
+- scenario/S065/target
+original_commits:
+- '@S065.c1'
+derived_commits:
+- '@S065.rv'
+- '@S065.c4'
+change_relationships:
+- a: '@S065.c1'
+  b: '@S065.rv'
+  relation: reverted
+- a: '@S065.c1'
+  b: '@S065.c4'
+  relation: identical
+files:
+- gatekit/rules.py
+- tests/test_rules.py
+regions:
+- file: gatekit/rules.py
+  function: upstream_timeout_ms
+testing_evidence: none
+deployment_evidence: none
+metadata_availability: full
+known_uncertainty: none
+expected_warnings:
+- reverted change re-applied by cherry-pick of the original commit
+safe_resolution_constraints: []
+human_review_required: false
+assertions:
+- type: patch_id_equal
+  a: '@S065.c1'
+  b: '@S065.c4'
+- type: trailer
+  commit: '@S065.c4'
+  expect: valid
+  origin: '@S065.c1'
+id: '65'
+sub_entries: []
+patch_ids:
+  '@S065.c1': f6123749f4b969358b467874bc21ef75f7510b64
+  '@S065.rv': 7c0b5c4cdc332ee350ea734420ec75ed0d88beff
+  '@S065.c4': f6123749f4b969358b467874bc21ef75f7510b64

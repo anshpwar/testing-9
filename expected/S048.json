@@ -1,0 +1,90 @@
+{
+  "scenario_id": "S048",
+  "repo_id": "testing-9",
+  "title": "History available only to a shallow depth",
+  "difficulty": 3,
+  "primary_catalog_id": 48,
+  "catalog_ids": [
+    48
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S032/base",
+    "target": "scenario/S032/target",
+    "all_pairs": [
+      [
+        "scenario/S032/base",
+        "scenario/S032/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+  "expected_conflicted_files": [
+    "gatekit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": {
+    "name": "shallow",
+    "depth": 2,
+    "effect": "clone is shallow"
+  },
+  "sits_on": [
+    "S032"
+  ],
+  "branches": [
+    "scenario/S032/base",
+    "scenario/S032/target"
+  ],
+  "id": "48",
+  "original_commits": [
+    "f1ef6150ac3a0d13903cf2033bf4ac72edc4f125"
+  ],
+  "derived_commits": [
+    "996ec23a2d4c1eb8a941daf2c8f02e3c7b19943f",
+    "8a5eed0d7f16df3f9ec19b218f4fac0eab0704e3",
+    "bf3f08a0e9fdff3d30483fe4effaae8865c6e027"
+  ],
+  "change_relationships": [
+    {
+      "a": "f1ef6150ac3a0d13903cf2033bf4ac72edc4f125",
+      "b": "bf3f08a0e9fdff3d30483fe4effaae8865c6e027",
+      "relation": "unrelated"
+    }
+  ],
+  "files": [
+    "gatekit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "gatekit/rules.py",
+      "function": "cache_ttl_s"
+    }
+  ],
+  "testing_evidence": "t1 PASSED in January 2025; three commits changed the rules since",
+  "deployment_evidence": "none",
+  "metadata_availability": "clone is shallow",
+  "known_uncertainty": "evidence is reachable only as far as the clone profile allows",
+  "expected_warnings": [
+    "clone profile shallow: clone is shallow",
+    "evidence predates later code changes"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": true,
+  "assertions": [
+    {
+      "type": "profile_effect",
+      "profile": "shallow"
+    }
+  ],
+  "sub_entries": [],
+  "patch_ids": {
+    "@S032.t1": "dfab82745b53597c838b23d7912950c6ba1788ca",
+    "@S032.t2": "b58418543ed5c7fefea72d16ab37ba11950b4897",
+    "@S032.t3": "d24bcbfbd8f16b29a1b9dad10cf6493e672e4f2a",
+    "@S032.t4": "c7f07289ac52789aaca47da723894953f55abc1d"
+  },
+  "commit_labels": {}
+}

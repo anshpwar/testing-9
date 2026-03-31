@@ -1,0 +1,54 @@
+{
+  "pins": {
+    "c_compiler": "Apple clang version 17.0.0 (clang-1700.6.4.2)",
+    "django": "6.1.2",
+    "git": "git version 2.53.0",
+    "make": "GNU Make 3.81",
+    "node": "v26.3.0",
+    "pytest": "pytest 9.2.0",
+    "python": "3.14.5"
+  },
+  "repo": "testing-9",
+  "services": [
+    "gateway-edge",
+    "gateway-admin"
+  ],
+  "stack": "C request parser and token-bucket rate limiter with a Python gateway and INI config layer, bound with ctypes",
+  "start_date": "2025-02-24T09:40:00",
+  "suites": [
+    {
+      "argv": [
+        "make",
+        "-s",
+        "test-c"
+      ],
+      "name": "c"
+    },
+    {
+      "argv": [
+        "{py}",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests",
+        "--ignore-glob=tests/test_zz*"
+      ],
+      "name": "unit"
+    },
+    {
+      "argv": [
+        "{py}",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "@glob:tests/test_zz*.py"
+      ],
+      "name": "integration"
+    }
+  ],
+  "title": "Gatewright"
+}

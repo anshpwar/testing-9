@@ -1,0 +1,143 @@
+scenario_id: S040
+repo_id: testing-9
+title: Same code deployed under different hashes
+difficulty: 4
+primary_catalog_id: 40
+catalog_ids:
+- 40
+- 59
+- 39
+expected_git_outcome: CONFLICT
+merge_pair:
+  base: scenario/S040/base
+  target: scenario/S040/target
+  all_pairs:
+  - - scenario/S040/base
+    - scenario/S040/target
+  additional_sides:
+    c59_newbase: scenario/S040/c59_newbase
+fork_commit: '@S040.F'
+expected_conflicted_files:
+- gatekit/rules.py
+- tests/test_rules.py
+validation_method: merge
+clone_profile: full
+branches:
+- scenario/S040/base
+- scenario/S040/c59_newbase
+- scenario/S040/target
+original_commits:
+- '@S040.t1'
+derived_commits:
+- '@S040.b1'
+change_relationships:
+- a: '@S040.t1'
+  b: '@S040.b1'
+  relation: identical
+files:
+- gatekit/rules.py
+- tests/test_rules.py
+regions:
+- file: gatekit/rules.py
+  function: webhook_retry_s
+testing_evidence: t1 PASSED in prod; b1 has the same code but no record
+deployment_evidence: same code deployed under two commit hashes
+metadata_availability: full
+known_uncertainty: none
+expected_warnings:
+- identical code under different hashes; evidence transfers only via tree equality
+safe_resolution_constraints: []
+human_review_required: false
+assertions:
+- type: function_equal
+  a: '@S040.t1'
+  b: '@S040.b1'
+  file: gatekit/rules.py
+  function: webhook_retry_s
+- type: commit_differs
+  a: '@S040.t1'
+  b: '@S040.b1'
+id: '40'
+sub_entries:
+- original_commits:
+  - '@S040.c59_c1'
+  - '@S040.c59_c2'
+  derived_commits:
+  - '@S040.c59_n1'
+  - '@S040.c59_n2'
+  change_relationships:
+  - a: '@S040.c59_c1'
+    b: '@S040.c59_n1'
+    relation: identical
+  - a: '@S040.c59_c2'
+    b: '@S040.c59_n2'
+    relation: identical
+  files:
+  - gatekit/rules.py
+  - tests/test_rules.py
+  - docs/changelog.md
+  regions:
+  - file: gatekit/rules.py
+    function: max_headers
+  - file: gatekit/rules.py
+    function: ip_block_minutes
+  testing_evidence: uat PASSED recorded on c2 against the old base
+  deployment_evidence: none
+  metadata_availability: full
+  known_uncertainty: none
+  expected_warnings:
+  - rebased onto a different base; evidence is for the old base
+  safe_resolution_constraints: []
+  human_review_required: false
+  assertions:
+  - type: patch_id_equal
+    a: '@S040.c59_c2'
+    b: '@S040.c59_n2'
+  - type: ancestor
+    a: '@S040.c59_f2'
+    b: '@S040.c59_n2'
+    expect: true
+  - type: ancestor
+    a: '@S040.c59_f2'
+    b: branch:target
+    expect: false
+  id: 40.a
+  catalog_id: 59
+- original_commits:
+  - '@S040.c39_t1'
+  derived_commits:
+  - '@S040.c39_t2'
+  change_relationships:
+  - a: '@S040.c39_t1'
+    b: '@S040.c39_t2'
+    relation: unrelated
+  files:
+  - gatekit/rules.py
+  - tests/test_rules.py
+  regions:
+  - file: gatekit/rules.py
+    function: quota_monthly_calls
+  testing_evidence: none
+  deployment_evidence: deploy record on t2 names t1 as the deployed commit
+  metadata_availability: misattached deploy record
+  known_uncertainty: none
+  expected_warnings:
+  - deployment record points at a different commit than it is attached to
+  safe_resolution_constraints: []
+  human_review_required: false
+  assertions:
+  - type: note_subject_mismatch
+    ref: deploy
+    commit: '@S040.c39_t2'
+    subject: '@S040.c39_t1'
+  id: 40.b
+  catalog_id: 39
+patch_ids:
+  '@S040.t1': 6c2966ac7e78a75a5dc5612c162e59755e67bec0
+  '@S040.b1': c7f07289ac52789aaca47da723894953f55abc1d
+  '@S040.c59_c1': f332679bf512481b3414aeaf2a89d27c061c600b
+  '@S040.c59_c2': d24bcbfbd8f16b29a1b9dad10cf6493e672e4f2a
+  '@S040.c59_n1': f332679bf512481b3414aeaf2a89d27c061c600b
+  '@S040.c59_n2': d24bcbfbd8f16b29a1b9dad10cf6493e672e4f2a
+  '@S040.c39_t1': 80eedb3b014cbb7ef58c701f6cdea8adff1e6bcb
+  '@S040.c39_t2': e04145ff027e02f8ae5a64954a1e7539e81a7de0

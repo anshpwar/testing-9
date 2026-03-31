@@ -1,0 +1,98 @@
+{
+  "scenario_id": "S065",
+  "repo_id": "testing-9",
+  "title": "Reverted change re-applied by cherry-pick",
+  "difficulty": 2,
+  "primary_catalog_id": 65,
+  "catalog_ids": [
+    65
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S065/base",
+    "target": "scenario/S065/target",
+    "all_pairs": [
+      [
+        "scenario/S065/base",
+        "scenario/S065/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+  "expected_conflicted_files": [
+    "gatekit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S065/base",
+    "scenario/S065/target"
+  ],
+  "original_commits": [
+    "1b963f16dffcbe4727c1a7060545955951f29b96"
+  ],
+  "derived_commits": [
+    "5a4abf68681a9f673a9af329b5a5220bc3c02d26",
+    "38bc67d9fc7a272498b22b13ee4ed98eb47fbf13"
+  ],
+  "change_relationships": [
+    {
+      "a": "1b963f16dffcbe4727c1a7060545955951f29b96",
+      "b": "5a4abf68681a9f673a9af329b5a5220bc3c02d26",
+      "relation": "reverted"
+    },
+    {
+      "a": "1b963f16dffcbe4727c1a7060545955951f29b96",
+      "b": "38bc67d9fc7a272498b22b13ee4ed98eb47fbf13",
+      "relation": "identical"
+    }
+  ],
+  "files": [
+    "gatekit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "gatekit/rules.py",
+      "function": "upstream_timeout_ms"
+    }
+  ],
+  "testing_evidence": "none",
+  "deployment_evidence": "none",
+  "metadata_availability": "full",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "reverted change re-applied by cherry-pick of the original commit"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "patch_id_equal",
+      "a": "1b963f16dffcbe4727c1a7060545955951f29b96",
+      "b": "38bc67d9fc7a272498b22b13ee4ed98eb47fbf13"
+    },
+    {
+      "type": "trailer",
+      "commit": "38bc67d9fc7a272498b22b13ee4ed98eb47fbf13",
+      "expect": "valid",
+      "origin": "1b963f16dffcbe4727c1a7060545955951f29b96"
+    }
+  ],
+  "id": "65",
+  "sub_entries": [],
+  "patch_ids": {
+    "@S065.c1": "f6123749f4b969358b467874bc21ef75f7510b64",
+    "@S065.rv": "7c0b5c4cdc332ee350ea734420ec75ed0d88beff",
+    "@S065.c4": "f6123749f4b969358b467874bc21ef75f7510b64"
+  },
+  "commit_labels": {
+    "S065.F": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+    "S065.c1": "1b963f16dffcbe4727c1a7060545955951f29b96",
+    "S065.c4": "38bc67d9fc7a272498b22b13ee4ed98eb47fbf13",
+    "S065.rv": "5a4abf68681a9f673a9af329b5a5220bc3c02d26",
+    "S065.t1": "f9abc62aaa1f9106258f1184fa9bad56743ac006"
+  }
+}

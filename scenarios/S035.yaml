@@ -1,0 +1,60 @@
+scenario_id: S035
+repo_id: testing-9
+title: Only the parent commit was tested
+difficulty: 3
+primary_catalog_id: 35
+catalog_ids:
+- 35
+expected_git_outcome: CONFLICT
+merge_pair:
+  base: scenario/S035/base
+  target: scenario/S035/target
+  all_pairs:
+  - - scenario/S035/base
+    - scenario/S035/target
+  additional_sides: {}
+fork_commit: '@S035.F'
+expected_conflicted_files:
+- gatekit/rules.py
+- tests/test_rules.py
+validation_method: merge
+clone_profile: full
+branches:
+- scenario/S035/base
+- scenario/S035/target
+original_commits:
+- '@S035.p'
+derived_commits:
+- '@S035.t1'
+change_relationships:
+- a: '@S035.p'
+  b: '@S035.t1'
+  relation: partial
+files:
+- gatekit/rules.py
+- tests/test_rules.py
+regions:
+- file: gatekit/rules.py
+  function: webhook_retry_s
+testing_evidence: parent p PASSED; child t1 never tested and changes the same rule
+deployment_evidence: none
+metadata_availability: full
+known_uncertainty: none
+expected_warnings:
+- ancestor evidence does not cover the modified code
+safe_resolution_constraints: []
+human_review_required: false
+assertions:
+- type: note
+  ref: ci
+  commit: '@S035.t1'
+  expect: absent
+- type: ancestor
+  a: '@S035.p'
+  b: '@S035.t1'
+  expect: true
+id: '35'
+sub_entries: []
+patch_ids:
+  '@S035.p': 6c2966ac7e78a75a5dc5612c162e59755e67bec0
+  '@S035.t1': 3ed9dd951c7ee0c579a8274f60617eb33e483fca

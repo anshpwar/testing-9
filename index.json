@@ -1,0 +1,103 @@
+[
+  {
+    "scenario_id": "S074",
+    "catalog_ids": [
+      74
+    ],
+    "difficulty": 1,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Submodule pinned to different commits"
+  },
+  {
+    "scenario_id": "S065",
+    "catalog_ids": [
+      65
+    ],
+    "difficulty": 2,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Reverted change re-applied by cherry-pick"
+  },
+  {
+    "scenario_id": "S032",
+    "catalog_ids": [
+      32
+    ],
+    "difficulty": 3,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Test evidence that predates later code changes"
+  },
+  {
+    "scenario_id": "S035",
+    "catalog_ids": [
+      35
+    ],
+    "difficulty": 3,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Only the parent commit was tested"
+  },
+  {
+    "scenario_id": "S048",
+    "catalog_ids": [
+      48
+    ],
+    "difficulty": 3,
+    "expected_git_outcome": "CONFLICT",
+    "title": "History available only to a shallow depth"
+  },
+  {
+    "scenario_id": "S094",
+    "catalog_ids": [
+      94
+    ],
+    "difficulty": 3,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Case-only rename and Unicode file names"
+  },
+  {
+    "scenario_id": "S020",
+    "catalog_ids": [
+      20,
+      13,
+      17
+    ],
+    "difficulty": 4,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Backport message names the wrong origin"
+  },
+  {
+    "scenario_id": "S040",
+    "catalog_ids": [
+      40,
+      59,
+      39
+    ],
+    "difficulty": 4,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Same code deployed under different hashes"
+  },
+  {
+    "scenario_id": "S090",
+    "catalog_ids": [
+      90,
+      84,
+      85
+    ],
+    "difficulty": 4,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Shell-like and instruction-like text in repository content"
+  },
+  {
+    "scenario_id": "S058",
+    "catalog_ids": [
+      58,
+      53,
+      55,
+      10,
+      40,
+      43
+    ],
+    "difficulty": 5,
+    "expected_git_outcome": "CONFLICT",
+    "title": "History deleted and the change reintroduced"
+  }
+]

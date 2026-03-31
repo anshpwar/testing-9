@@ -1,0 +1,99 @@
+{
+  "scenario_id": "S094",
+  "repo_id": "testing-9",
+  "title": "Case-only rename and Unicode file names",
+  "difficulty": 3,
+  "primary_catalog_id": 94,
+  "catalog_ids": [
+    94
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S094/base",
+    "target": "scenario/S094/target",
+    "all_pairs": [
+      [
+        "scenario/S094/base",
+        "scenario/S094/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+  "expected_conflicted_files": [
+    "docs/operations.md"
+  ],
+  "validation_method": "merge-tree",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S094/base",
+    "scenario/S094/target"
+  ],
+  "original_commits": [
+    "39879b9cd98d9ff05fbbfac4be10146bb4dafc7a"
+  ],
+  "derived_commits": [
+    "610b21b712bdc6017ee07cab3f4221e883b65de1"
+  ],
+  "change_relationships": [
+    {
+      "a": "610b21b712bdc6017ee07cab3f4221e883b65de1",
+      "b": "39879b9cd98d9ff05fbbfac4be10146bb4dafc7a",
+      "relation": "unrelated"
+    }
+  ],
+  "files": [
+    "docs/Operations.md",
+    "docs/operations.md",
+    "docs/Café.md",
+    "docs/Café.md"
+  ],
+  "regions": [
+    {
+      "file": "docs/Operations.md",
+      "kind": "case-only rename plus content edit"
+    }
+  ],
+  "testing_evidence": "none",
+  "deployment_evidence": "none",
+  "metadata_availability": "full",
+  "known_uncertainty": "validated with git merge-tree because the macOS work tree cannot hold both name forms",
+  "expected_warnings": [
+    "case-only rename and NFC/NFD names cannot coexist on a case-insensitive normalising filesystem"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": true,
+  "assertions": [
+    {
+      "type": "tree_has_path",
+      "commit": "610b21b712bdc6017ee07cab3f4221e883b65de1",
+      "path": "docs/operations.md"
+    },
+    {
+      "type": "tree_has_path",
+      "commit": "39879b9cd98d9ff05fbbfac4be10146bb4dafc7a",
+      "path": "docs/Operations.md"
+    },
+    {
+      "type": "tree_has_path",
+      "commit": "39879b9cd98d9ff05fbbfac4be10146bb4dafc7a",
+      "path": "docs/Café.md"
+    },
+    {
+      "type": "tree_has_path",
+      "commit": "610b21b712bdc6017ee07cab3f4221e883b65de1",
+      "path": "docs/Café.md"
+    }
+  ],
+  "id": "94",
+  "sub_entries": [],
+  "patch_ids": {
+    "@S094.t1": "4d384379fc582417fe0fcfeb2f8d717b3dc9405d",
+    "@S094.b1": "c6888e3affbaf73644e36fb605bab05f060d1327"
+  },
+  "commit_labels": {
+    "S094.F": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+    "S094.b1": "610b21b712bdc6017ee07cab3f4221e883b65de1",
+    "S094.t1": "39879b9cd98d9ff05fbbfac4be10146bb4dafc7a"
+  }
+}

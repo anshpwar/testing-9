@@ -1,0 +1,83 @@
+{
+  "scenario_id": "S074",
+  "repo_id": "testing-9",
+  "title": "Submodule pinned to different commits",
+  "difficulty": 1,
+  "primary_catalog_id": 74,
+  "catalog_ids": [
+    74
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S074/base",
+    "target": "scenario/S074/target",
+    "all_pairs": [
+      [
+        "scenario/S074/base",
+        "scenario/S074/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+  "expected_conflicted_files": [
+    "vendor/routing"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S074/base",
+    "scenario/S074/target"
+  ],
+  "original_commits": [
+    "1463b7f8e848e2fb3390b94dab300d66e905c3ef"
+  ],
+  "derived_commits": [
+    "92940dd59bd4f5d98c5ccc84b4ae46a5097b8722"
+  ],
+  "change_relationships": [
+    {
+      "a": "1463b7f8e848e2fb3390b94dab300d66e905c3ef",
+      "b": "92940dd59bd4f5d98c5ccc84b4ae46a5097b8722",
+      "relation": "unrelated"
+    }
+  ],
+  "files": [
+    "vendor/routing",
+    ".gitmodules"
+  ],
+  "regions": [
+    {
+      "file": "vendor/routing",
+      "kind": "submodule pointer"
+    }
+  ],
+  "testing_evidence": "none",
+  "deployment_evidence": "none",
+  "metadata_availability": "submodule target is repository testing-6 (pins 2fe6e8dd4d vs d9a76e910f)",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "submodule pinned to different commits of testing-6"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "mode_is",
+      "commit": "1463b7f8e848e2fb3390b94dab300d66e905c3ef",
+      "path": "vendor/routing",
+      "mode": "160000"
+    }
+  ],
+  "id": "74",
+  "sub_entries": [],
+  "patch_ids": {
+    "@S074.b1": "acdfdabf6549b871e42f5eb7d52218799496dea1",
+    "@S074.t1": "13e8971bb854ec5438d1765118bce01b49747945"
+  },
+  "commit_labels": {
+    "S074.F": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+    "S074.b1": "1463b7f8e848e2fb3390b94dab300d66e905c3ef",
+    "S074.t1": "92940dd59bd4f5d98c5ccc84b4ae46a5097b8722"
+  }
+}

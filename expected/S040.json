@@ -1,0 +1,224 @@
+{
+  "scenario_id": "S040",
+  "repo_id": "testing-9",
+  "title": "Same code deployed under different hashes",
+  "difficulty": 4,
+  "primary_catalog_id": 40,
+  "catalog_ids": [
+    40,
+    59,
+    39
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S040/base",
+    "target": "scenario/S040/target",
+    "all_pairs": [
+      [
+        "scenario/S040/base",
+        "scenario/S040/target"
+      ]
+    ],
+    "additional_sides": {
+      "c59_newbase": "scenario/S040/c59_newbase"
+    }
+  },
+  "fork_commit": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+  "expected_conflicted_files": [
+    "gatekit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S040/base",
+    "scenario/S040/c59_newbase",
+    "scenario/S040/target"
+  ],
+  "original_commits": [
+    "a80ca9a1b48b29f01be77536f044cdf5931db444"
+  ],
+  "derived_commits": [
+    "740170a6b31a64000de755966b6857a027f8c1eb"
+  ],
+  "change_relationships": [
+    {
+      "a": "a80ca9a1b48b29f01be77536f044cdf5931db444",
+      "b": "740170a6b31a64000de755966b6857a027f8c1eb",
+      "relation": "identical"
+    }
+  ],
+  "files": [
+    "gatekit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "gatekit/rules.py",
+      "function": "webhook_retry_s"
+    }
+  ],
+  "testing_evidence": "t1 PASSED in prod; b1 has the same code but no record",
+  "deployment_evidence": "same code deployed under two commit hashes",
+  "metadata_availability": "full",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "identical code under different hashes; evidence transfers only via tree equality"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "function_equal",
+      "a": "a80ca9a1b48b29f01be77536f044cdf5931db444",
+      "b": "740170a6b31a64000de755966b6857a027f8c1eb",
+      "file": "gatekit/rules.py",
+      "function": "webhook_retry_s"
+    },
+    {
+      "type": "commit_differs",
+      "a": "a80ca9a1b48b29f01be77536f044cdf5931db444",
+      "b": "740170a6b31a64000de755966b6857a027f8c1eb"
+    }
+  ],
+  "id": "40",
+  "sub_entries": [
+    {
+      "original_commits": [
+        "f5fe50d2ad0967e55be3335303567f4f0b0036d6",
+        "ada4de278373d846b1739827c0a1b27e31fb5653"
+      ],
+      "derived_commits": [
+        "d9eecd6d21972f410efded5d346518bb7db6e10c",
+        "2ba5603fcf632afb39bbfffc39f8738b7e3fb252"
+      ],
+      "change_relationships": [
+        {
+          "a": "f5fe50d2ad0967e55be3335303567f4f0b0036d6",
+          "b": "d9eecd6d21972f410efded5d346518bb7db6e10c",
+          "relation": "identical"
+        },
+        {
+          "a": "ada4de278373d846b1739827c0a1b27e31fb5653",
+          "b": "2ba5603fcf632afb39bbfffc39f8738b7e3fb252",
+          "relation": "identical"
+        }
+      ],
+      "files": [
+        "gatekit/rules.py",
+        "tests/test_rules.py",
+        "docs/changelog.md"
+      ],
+      "regions": [
+        {
+          "file": "gatekit/rules.py",
+          "function": "max_headers"
+        },
+        {
+          "file": "gatekit/rules.py",
+          "function": "ip_block_minutes"
+        }
+      ],
+      "testing_evidence": "uat PASSED recorded on c2 against the old base",
+      "deployment_evidence": "none",
+      "metadata_availability": "full",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "rebased onto a different base; evidence is for the old base"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "patch_id_equal",
+          "a": "ada4de278373d846b1739827c0a1b27e31fb5653",
+          "b": "2ba5603fcf632afb39bbfffc39f8738b7e3fb252"
+        },
+        {
+          "type": "ancestor",
+          "a": "ff25ef5bca2e586bb4f4327775e891b86c8e41c4",
+          "b": "2ba5603fcf632afb39bbfffc39f8738b7e3fb252",
+          "expect": true
+        },
+        {
+          "type": "ancestor",
+          "a": "ff25ef5bca2e586bb4f4327775e891b86c8e41c4",
+          "b": "branch:target",
+          "expect": false
+        }
+      ],
+      "id": "40.a",
+      "catalog_id": 59
+    },
+    {
+      "original_commits": [
+        "67fe7a3e4f3a86d6784c4e0a016b428264c7f002"
+      ],
+      "derived_commits": [
+        "13bd27a2d4436431551b5639f2e8a37f2bf9f65e"
+      ],
+      "change_relationships": [
+        {
+          "a": "67fe7a3e4f3a86d6784c4e0a016b428264c7f002",
+          "b": "13bd27a2d4436431551b5639f2e8a37f2bf9f65e",
+          "relation": "unrelated"
+        }
+      ],
+      "files": [
+        "gatekit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "gatekit/rules.py",
+          "function": "quota_monthly_calls"
+        }
+      ],
+      "testing_evidence": "none",
+      "deployment_evidence": "deploy record on t2 names t1 as the deployed commit",
+      "metadata_availability": "misattached deploy record",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "deployment record points at a different commit than it is attached to"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "note_subject_mismatch",
+          "ref": "deploy",
+          "commit": "13bd27a2d4436431551b5639f2e8a37f2bf9f65e",
+          "subject": "67fe7a3e4f3a86d6784c4e0a016b428264c7f002"
+        }
+      ],
+      "id": "40.b",
+      "catalog_id": 39
+    }
+  ],
+  "patch_ids": {
+    "@S040.t1": "6c2966ac7e78a75a5dc5612c162e59755e67bec0",
+    "@S040.b1": "c7f07289ac52789aaca47da723894953f55abc1d",
+    "@S040.c59_c1": "f332679bf512481b3414aeaf2a89d27c061c600b",
+    "@S040.c59_c2": "d24bcbfbd8f16b29a1b9dad10cf6493e672e4f2a",
+    "@S040.c59_n1": "f332679bf512481b3414aeaf2a89d27c061c600b",
+    "@S040.c59_n2": "d24bcbfbd8f16b29a1b9dad10cf6493e672e4f2a",
+    "@S040.c39_t1": "80eedb3b014cbb7ef58c701f6cdea8adff1e6bcb",
+    "@S040.c39_t2": "e04145ff027e02f8ae5a64954a1e7539e81a7de0"
+  },
+  "commit_labels": {
+    "S040.F": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+    "S040.b1": "740170a6b31a64000de755966b6857a027f8c1eb",
+    "S040.b2": "89fe3a7e7a36b3fdba1bbd6bddd8af11e185fb30",
+    "S040.c39_b1": "65e8d9ca9503227e199f5e4bcae34d3f88770cea",
+    "S040.c39_t1": "67fe7a3e4f3a86d6784c4e0a016b428264c7f002",
+    "S040.c39_t2": "13bd27a2d4436431551b5639f2e8a37f2bf9f65e",
+    "S040.c59_c1": "f5fe50d2ad0967e55be3335303567f4f0b0036d6",
+    "S040.c59_c2": "ada4de278373d846b1739827c0a1b27e31fb5653",
+    "S040.c59_f2": "ff25ef5bca2e586bb4f4327775e891b86c8e41c4",
+    "S040.c59_n1": "d9eecd6d21972f410efded5d346518bb7db6e10c",
+    "S040.c59_n2": "2ba5603fcf632afb39bbfffc39f8738b7e3fb252",
+    "S040.c59_t1": "b8d456bf7768fdb8e9607fd76405721ed94b92ba",
+    "S040.t1": "a80ca9a1b48b29f01be77536f044cdf5931db444",
+    "S040.t2": "8f47329886b2ec1df125d2b3fa875647be51aa7b"
+  }
+}

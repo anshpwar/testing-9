@@ -1,0 +1,140 @@
+scenario_id: S020
+repo_id: testing-9
+title: Backport message names the wrong origin
+difficulty: 4
+primary_catalog_id: 20
+catalog_ids:
+- 20
+- 13
+- 17
+expected_git_outcome: CONFLICT
+merge_pair:
+  base: scenario/S020/base
+  target: scenario/S020/target
+  all_pairs:
+  - - scenario/S020/base
+    - scenario/S020/target
+  additional_sides:
+    c17_mid: scenario/S020/c17_mid
+fork_commit: '@S020.F'
+expected_conflicted_files:
+- gatekit/rules.py
+- tests/test_rules.py
+validation_method: merge
+clone_profile: full
+branches:
+- scenario/S020/base
+- scenario/S020/c17_mid
+- scenario/S020/target
+original_commits:
+- '@S020.t1'
+derived_commits:
+- '@S020.b1'
+change_relationships:
+- a: '@S020.t1'
+  b: '@S020.b1'
+  relation: identical
+files:
+- gatekit/rules.py
+- tests/test_rules.py
+regions:
+- file: gatekit/rules.py
+  function: retry_budget_pct
+testing_evidence: none
+deployment_evidence: none
+metadata_availability: trailer and provenance note both name the wrong origin commit
+known_uncertainty: true origin recoverable only by patch-id
+expected_warnings:
+- cherry-pick trailer does not point at the real origin
+safe_resolution_constraints: []
+human_review_required: false
+assertions:
+- type: patch_id_equal
+  a: '@S020.t1'
+  b: '@S020.b1'
+- type: trailer
+  commit: '@S020.b1'
+  expect: invalid
+  origin: '@S020.t1'
+- type: note
+  ref: provenance
+  commit: '@S020.b1'
+  expect: present
+id: '20'
+sub_entries:
+- original_commits:
+  - '@S020.c13_t1'
+  derived_commits:
+  - '@S020.c13_b1'
+  change_relationships:
+  - a: '@S020.c13_t1'
+    b: '@S020.c13_b1'
+    relation: identical
+  files:
+  - gatekit/rules.py
+  - tests/test_rules.py
+  regions:
+  - file: gatekit/rules.py
+    function: cache_ttl_s
+  testing_evidence: none
+  deployment_evidence: none
+  metadata_availability: no cherry-pick trailer; lineage recoverable only through patch-id
+  known_uncertainty: none
+  expected_warnings:
+  - no explicit origin reference
+  safe_resolution_constraints: []
+  human_review_required: false
+  assertions:
+  - type: patch_id_equal
+    a: '@S020.c13_t1'
+    b: '@S020.c13_b1'
+  - type: trailer
+    commit: '@S020.c13_b1'
+    expect: missing
+  id: 20.a
+  catalog_id: 13
+- original_commits:
+  - '@S020.c17_t1'
+  derived_commits:
+  - '@S020.c17_m1'
+  - '@S020.c17_b1'
+  change_relationships:
+  - a: '@S020.c17_t1'
+    b: '@S020.c17_m1'
+    relation: partial
+  - a: '@S020.c17_m1'
+    b: '@S020.c17_b1'
+    relation: identical
+  files:
+  - gatekit/rules.py
+  - tests/test_rules.py
+  regions:
+  - file: gatekit/rules.py
+    function: max_headers
+  testing_evidence: none
+  deployment_evidence: none
+  metadata_availability: b1 trailer names m1 only; t1 is reachable through m1's trailer
+  known_uncertainty: none
+  expected_warnings:
+  - backport of a modified backport; origin chain has two hops
+  safe_resolution_constraints: []
+  human_review_required: false
+  assertions:
+  - type: trailer
+    commit: '@S020.c17_b1'
+    expect: valid
+    origin: '@S020.c17_m1'
+  - type: trailer
+    commit: '@S020.c17_m1'
+    expect: valid
+    origin: '@S020.c17_t1'
+  id: 20.b
+  catalog_id: 17
+patch_ids:
+  '@S020.t1': 27e316b8ab1d44feba54d05ad42e39f2d5d4ba42
+  '@S020.b1': 27e316b8ab1d44feba54d05ad42e39f2d5d4ba42
+  '@S020.c13_t1': 6a1c2fcfa5830e00518965669e603c85ddda1d04
+  '@S020.c13_b1': fec0d3000d5095f19c923b3b19f15e96426b0f0f
+  '@S020.c17_t1': b58418543ed5c7fefea72d16ab37ba11950b4897
+  '@S020.c17_m1': 5476c31f60105a3bbe2c2ef3b5f09be55356cf90
+  '@S020.c17_b1': 397e31cf9f27142e188f3587155d5417b334d8b0

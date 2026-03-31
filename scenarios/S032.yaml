@@ -1,0 +1,66 @@
+scenario_id: S032
+repo_id: testing-9
+title: Test evidence that predates later code changes
+difficulty: 3
+primary_catalog_id: 32
+catalog_ids:
+- 32
+expected_git_outcome: CONFLICT
+merge_pair:
+  base: scenario/S032/base
+  target: scenario/S032/target
+  all_pairs:
+  - - scenario/S032/base
+    - scenario/S032/target
+  additional_sides: {}
+fork_commit: '@S032.F'
+expected_conflicted_files:
+- gatekit/rules.py
+- tests/test_rules.py
+validation_method: merge
+clone_profile: full
+branches:
+- scenario/S032/base
+- scenario/S032/target
+original_commits:
+- '@S032.t1'
+derived_commits:
+- '@S032.t2'
+- '@S032.t3'
+- '@S032.t4'
+change_relationships:
+- a: '@S032.t1'
+  b: '@S032.t4'
+  relation: unrelated
+files:
+- gatekit/rules.py
+- tests/test_rules.py
+regions:
+- file: gatekit/rules.py
+  function: cache_ttl_s
+testing_evidence: t1 PASSED in January 2025; three commits changed the rules since
+deployment_evidence: none
+metadata_availability: full
+known_uncertainty: none
+expected_warnings:
+- evidence predates later code changes
+safe_resolution_constraints: []
+human_review_required: false
+assertions:
+- type: ancestor
+  a: '@S032.t1'
+  b: '@S032.t4'
+  expect: true
+- type: note
+  ref: ci
+  commit: '@S032.t1'
+  expect: present
+  fields:
+    finished_at: 2025-01-06T09:05:00+0000
+id: '32'
+sub_entries: []
+patch_ids:
+  '@S032.t1': dfab82745b53597c838b23d7912950c6ba1788ca
+  '@S032.t2': b58418543ed5c7fefea72d16ab37ba11950b4897
+  '@S032.t3': d24bcbfbd8f16b29a1b9dad10cf6493e672e4f2a
+  '@S032.t4': c7f07289ac52789aaca47da723894953f55abc1d

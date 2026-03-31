@@ -1,0 +1,91 @@
+{
+  "scenario_id": "S035",
+  "repo_id": "testing-9",
+  "title": "Only the parent commit was tested",
+  "difficulty": 3,
+  "primary_catalog_id": 35,
+  "catalog_ids": [
+    35
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S035/base",
+    "target": "scenario/S035/target",
+    "all_pairs": [
+      [
+        "scenario/S035/base",
+        "scenario/S035/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+  "expected_conflicted_files": [
+    "gatekit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S035/base",
+    "scenario/S035/target"
+  ],
+  "original_commits": [
+    "4509bd7a698677de2c798a540ab100d2184c765c"
+  ],
+  "derived_commits": [
+    "ebf464380ef4e5c4f5914d19ac432d097eaa602a"
+  ],
+  "change_relationships": [
+    {
+      "a": "4509bd7a698677de2c798a540ab100d2184c765c",
+      "b": "ebf464380ef4e5c4f5914d19ac432d097eaa602a",
+      "relation": "partial"
+    }
+  ],
+  "files": [
+    "gatekit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "gatekit/rules.py",
+      "function": "webhook_retry_s"
+    }
+  ],
+  "testing_evidence": "parent p PASSED; child t1 never tested and changes the same rule",
+  "deployment_evidence": "none",
+  "metadata_availability": "full",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "ancestor evidence does not cover the modified code"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "note",
+      "ref": "ci",
+      "commit": "ebf464380ef4e5c4f5914d19ac432d097eaa602a",
+      "expect": "absent"
+    },
+    {
+      "type": "ancestor",
+      "a": "4509bd7a698677de2c798a540ab100d2184c765c",
+      "b": "ebf464380ef4e5c4f5914d19ac432d097eaa602a",
+      "expect": true
+    }
+  ],
+  "id": "35",
+  "sub_entries": [],
+  "patch_ids": {
+    "@S035.p": "6c2966ac7e78a75a5dc5612c162e59755e67bec0",
+    "@S035.t1": "3ed9dd951c7ee0c579a8274f60617eb33e483fca"
+  },
+  "commit_labels": {
+    "S035.F": "e06381ba2e4eb099659163a2f00df14acb58bb7f",
+    "S035.b1": "6db7220f9340f889d66d07129239bd130a486d39",
+    "S035.p": "4509bd7a698677de2c798a540ab100d2184c765c",
+    "S035.t1": "ebf464380ef4e5c4f5914d19ac432d097eaa602a"
+  }
+}
