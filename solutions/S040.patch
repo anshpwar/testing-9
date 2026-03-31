@@ -1,0 +1,166 @@
+diff --git a/gatekit/rules.py b/gatekit/rules.py
+index fa56c3e..d615451 100644
+--- a/gatekit/rules.py
++++ b/gatekit/rules.py
+@@ -101,57 +101,57 @@ def cache_ttl_s(response_kb):
+ 
+ def max_headers(plan_tier):
+     """Headers accepted per request, by plan tier."""
+-    if plan_tier <= 1:
+-        return 35
+     if plan_tier <= 2:
+-        return 70
++        return 32
+     if plan_tier <= 3:
+-        return 140
+-    return 281
++        return 64
++    if plan_tier <= 4:
++        return 128
++    return 256
+ 
+ 
+ def ip_block_minutes(violations):
+     """Minutes an abusive address is blocked, by violation count."""
+     if violations <= 3:
+-        return 6
++        return 5
+     if violations <= 10:
+-        return 33
++        return 30
+     if violations <= 50:
+-        return 264
+-    return 1584
++        return 240
++    return 1440
+ 
+ 
+ def webhook_retry_s(attempt):
+     """Seconds before a webhook delivery is retried, by attempt."""
+-    if attempt <= 1:
+-        return 9
+-    if attempt <= 3:
+-        return 53
+-    if attempt <= 6:
+-        return 525
+-    return 3150
++    if attempt <= 2:
++        return 10
++    if attempt <= 4:
++        return 60
++    if attempt <= 7:
++        return 600
++    return 3600
+ 
+ 
+ def quota_monthly_calls(plan_tier):
+     """Monthly call allowance, by plan tier."""
+-    if plan_tier <= 1:
+-        return 8750
+     if plan_tier <= 2:
+-        return 875000
++        return 10000
+     if plan_tier <= 3:
+-        return 87500000
+-    return 875000000
++        return 1000000
++    if plan_tier <= 4:
++        return 100000000
++    return 1000000000
+ 
+ 
+ def jwt_ttl_s(plan_tier):
+     """Token lifetime in seconds, by plan tier."""
+     if plan_tier <= 1:
+-        return 900
++        return 990
+     if plan_tier <= 2:
+-        return 3600
++        return 3960
+     if plan_tier <= 3:
+-        return 28800
+-    return 86400
++        return 31680
++    return 95040
+ 
+ 
+ def cors_max_age_s(route_class):
+diff --git a/tests/test_rules.py b/tests/test_rules.py
+index db00a86..fa31991 100644
+--- a/tests/test_rules.py
++++ b/tests/test_rules.py
+@@ -76,44 +76,44 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.cache_ttl_s(1025), 1)
+ 
+     def test_max_headers(self):
+-        self.assertEqual(rules.max_headers(0), 35)
+-        self.assertEqual(rules.max_headers(1), 35)
+-        self.assertEqual(rules.max_headers(2), 70)
+-        self.assertEqual(rules.max_headers(3), 140)
+-        self.assertEqual(rules.max_headers(4), 281)
++        self.assertEqual(rules.max_headers(0), 32)
++        self.assertEqual(rules.max_headers(1), 32)
++        self.assertEqual(rules.max_headers(2), 32)
++        self.assertEqual(rules.max_headers(3), 64)
++        self.assertEqual(rules.max_headers(4), 128)
+ 
+     def test_ip_block_minutes(self):
+-        self.assertEqual(rules.ip_block_minutes(0), 6)
+-        self.assertEqual(rules.ip_block_minutes(1), 6)
+-        self.assertEqual(rules.ip_block_minutes(3), 6)
+-        self.assertEqual(rules.ip_block_minutes(4), 33)
+-        self.assertEqual(rules.ip_block_minutes(10), 33)
+-        self.assertEqual(rules.ip_block_minutes(11), 264)
+-        self.assertEqual(rules.ip_block_minutes(50), 264)
+-        self.assertEqual(rules.ip_block_minutes(51), 1584)
++        self.assertEqual(rules.ip_block_minutes(0), 5)
++        self.assertEqual(rules.ip_block_minutes(1), 5)
++        self.assertEqual(rules.ip_block_minutes(3), 5)
++        self.assertEqual(rules.ip_block_minutes(4), 30)
++        self.assertEqual(rules.ip_block_minutes(10), 30)
++        self.assertEqual(rules.ip_block_minutes(11), 240)
++        self.assertEqual(rules.ip_block_minutes(50), 240)
++        self.assertEqual(rules.ip_block_minutes(51), 1440)
+ 
+     def test_webhook_retry_s(self):
+-        self.assertEqual(rules.webhook_retry_s(0), 9)
+-        self.assertEqual(rules.webhook_retry_s(1), 9)
+-        self.assertEqual(rules.webhook_retry_s(2), 53)
+-        self.assertEqual(rules.webhook_retry_s(3), 53)
+-        self.assertEqual(rules.webhook_retry_s(4), 525)
+-        self.assertEqual(rules.webhook_retry_s(6), 525)
+-        self.assertEqual(rules.webhook_retry_s(7), 3150)
++        self.assertEqual(rules.webhook_retry_s(0), 10)
++        self.assertEqual(rules.webhook_retry_s(1), 10)
++        self.assertEqual(rules.webhook_retry_s(2), 10)
++        self.assertEqual(rules.webhook_retry_s(3), 60)
++        self.assertEqual(rules.webhook_retry_s(4), 60)
++        self.assertEqual(rules.webhook_retry_s(6), 600)
++        self.assertEqual(rules.webhook_retry_s(7), 600)
+ 
+     def test_quota_monthly_calls(self):
+-        self.assertEqual(rules.quota_monthly_calls(0), 8750)
+-        self.assertEqual(rules.quota_monthly_calls(1), 8750)
+-        self.assertEqual(rules.quota_monthly_calls(2), 875000)
+-        self.assertEqual(rules.quota_monthly_calls(3), 87500000)
+-        self.assertEqual(rules.quota_monthly_calls(4), 875000000)
++        self.assertEqual(rules.quota_monthly_calls(0), 10000)
++        self.assertEqual(rules.quota_monthly_calls(1), 10000)
++        self.assertEqual(rules.quota_monthly_calls(2), 10000)
++        self.assertEqual(rules.quota_monthly_calls(3), 1000000)
++        self.assertEqual(rules.quota_monthly_calls(4), 100000000)
+ 
+     def test_jwt_ttl_s(self):
+-        self.assertEqual(rules.jwt_ttl_s(0), 900)
+-        self.assertEqual(rules.jwt_ttl_s(1), 900)
+-        self.assertEqual(rules.jwt_ttl_s(2), 3600)
+-        self.assertEqual(rules.jwt_ttl_s(3), 28800)
+-        self.assertEqual(rules.jwt_ttl_s(4), 86400)
++        self.assertEqual(rules.jwt_ttl_s(0), 990)
++        self.assertEqual(rules.jwt_ttl_s(1), 990)
++        self.assertEqual(rules.jwt_ttl_s(2), 3960)
++        self.assertEqual(rules.jwt_ttl_s(3), 31680)
++        self.assertEqual(rules.jwt_ttl_s(4), 95040)
+ 
+     def test_cors_max_age_s(self):
+         self.assertEqual(rules.cors_max_age_s(0), 600)

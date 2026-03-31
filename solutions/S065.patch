@@ -1,0 +1,44 @@
+diff --git a/gatekit/rules.py b/gatekit/rules.py
+index 92e705f..5f2d8e4 100644
+--- a/gatekit/rules.py
++++ b/gatekit/rules.py
+@@ -57,13 +57,13 @@ def max_body_kb(plan_tier):
+ 
+ def upstream_timeout_ms(route_class):
+     """Upstream timeout in milliseconds, by route class."""
+-    if route_class <= 1:
+-        return 550
+     if route_class <= 2:
+-        return 2200
++        return 500
+     if route_class <= 3:
+-        return 11000
+-    return 33000
++        return 2000
++    if route_class <= 4:
++        return 10000
++    return 30000
+ 
+ 
+ def retry_budget_pct(error_rate_pct):
+diff --git a/tests/test_rules.py b/tests/test_rules.py
+index 33b4e43..15001cf 100644
+--- a/tests/test_rules.py
++++ b/tests/test_rules.py
+@@ -40,11 +40,11 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.max_body_kb(4), 16384)
+ 
+     def test_upstream_timeout_ms(self):
+-        self.assertEqual(rules.upstream_timeout_ms(0), 550)
+-        self.assertEqual(rules.upstream_timeout_ms(1), 550)
+-        self.assertEqual(rules.upstream_timeout_ms(2), 2200)
+-        self.assertEqual(rules.upstream_timeout_ms(3), 11000)
+-        self.assertEqual(rules.upstream_timeout_ms(4), 33000)
++        self.assertEqual(rules.upstream_timeout_ms(0), 500)
++        self.assertEqual(rules.upstream_timeout_ms(1), 500)
++        self.assertEqual(rules.upstream_timeout_ms(2), 500)
++        self.assertEqual(rules.upstream_timeout_ms(3), 2000)
++        self.assertEqual(rules.upstream_timeout_ms(4), 10000)
+ 
+     def test_retry_budget_pct(self):
+         self.assertEqual(rules.retry_budget_pct(0), 20)

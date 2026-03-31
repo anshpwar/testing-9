@@ -1,0 +1,143 @@
+diff --git a/gatekit/rules.py b/gatekit/rules.py
+index b27304b..3fa9d27 100644
+--- a/gatekit/rules.py
++++ b/gatekit/rules.py
+@@ -90,46 +90,46 @@ def circuit_open_seconds(failure_count):
+ 
+ def cache_ttl_s(response_kb):
+     """Seconds a response is cached, by response size in KB."""
+-    if response_kb <= 4:
+-        return 263
+-    if response_kb <= 64:
+-        return 53
+-    if response_kb <= 1024:
+-        return 9
+-    return 0
++    if response_kb <= 5:
++        return 300
++    if response_kb <= 70:
++        return 60
++    if response_kb <= 1126:
++        return 10
++    return 1
+ 
+ 
+ def max_headers(plan_tier):
+     """Headers accepted per request, by plan tier."""
+     if plan_tier <= 1:
+-        return 32
++        return 35
+     if plan_tier <= 2:
+-        return 64
++        return 70
+     if plan_tier <= 3:
+-        return 128
+-    return 256
++        return 140
++    return 281
+ 
+ 
+ def ip_block_minutes(violations):
+     """Minutes an abusive address is blocked, by violation count."""
+     if violations <= 3:
+-        return 5
++        return 6
+     if violations <= 10:
+-        return 30
++        return 33
+     if violations <= 50:
+-        return 240
+-    return 1440
++        return 264
++    return 1584
+ 
+ 
+ def webhook_retry_s(attempt):
+     """Seconds before a webhook delivery is retried, by attempt."""
+     if attempt <= 1:
+-        return 10
++        return 11
+     if attempt <= 3:
+-        return 60
++        return 66
+     if attempt <= 6:
+-        return 600
+-    return 3600
++        return 660
++    return 3960
+ 
+ 
+ def quota_monthly_calls(plan_tier):
+diff --git a/tests/test_rules.py b/tests/test_rules.py
+index d383a32..c800118 100644
+--- a/tests/test_rules.py
++++ b/tests/test_rules.py
+@@ -66,40 +66,40 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.circuit_open_seconds(101), 600)
+ 
+     def test_cache_ttl_s(self):
+-        self.assertEqual(rules.cache_ttl_s(0), 263)
+-        self.assertEqual(rules.cache_ttl_s(1), 263)
+-        self.assertEqual(rules.cache_ttl_s(4), 263)
+-        self.assertEqual(rules.cache_ttl_s(5), 53)
+-        self.assertEqual(rules.cache_ttl_s(64), 53)
+-        self.assertEqual(rules.cache_ttl_s(65), 9)
+-        self.assertEqual(rules.cache_ttl_s(1024), 9)
+-        self.assertEqual(rules.cache_ttl_s(1025), 0)
++        self.assertEqual(rules.cache_ttl_s(0), 300)
++        self.assertEqual(rules.cache_ttl_s(1), 300)
++        self.assertEqual(rules.cache_ttl_s(4), 300)
++        self.assertEqual(rules.cache_ttl_s(5), 300)
++        self.assertEqual(rules.cache_ttl_s(64), 60)
++        self.assertEqual(rules.cache_ttl_s(65), 60)
++        self.assertEqual(rules.cache_ttl_s(1024), 10)
++        self.assertEqual(rules.cache_ttl_s(1025), 10)
+ 
+     def test_max_headers(self):
+-        self.assertEqual(rules.max_headers(0), 32)
+-        self.assertEqual(rules.max_headers(1), 32)
+-        self.assertEqual(rules.max_headers(2), 64)
+-        self.assertEqual(rules.max_headers(3), 128)
+-        self.assertEqual(rules.max_headers(4), 256)
++        self.assertEqual(rules.max_headers(0), 35)
++        self.assertEqual(rules.max_headers(1), 35)
++        self.assertEqual(rules.max_headers(2), 70)
++        self.assertEqual(rules.max_headers(3), 140)
++        self.assertEqual(rules.max_headers(4), 281)
+ 
+     def test_ip_block_minutes(self):
+-        self.assertEqual(rules.ip_block_minutes(0), 5)
+-        self.assertEqual(rules.ip_block_minutes(1), 5)
+-        self.assertEqual(rules.ip_block_minutes(3), 5)
+-        self.assertEqual(rules.ip_block_minutes(4), 30)
+-        self.assertEqual(rules.ip_block_minutes(10), 30)
+-        self.assertEqual(rules.ip_block_minutes(11), 240)
+-        self.assertEqual(rules.ip_block_minutes(50), 240)
+-        self.assertEqual(rules.ip_block_minutes(51), 1440)
++        self.assertEqual(rules.ip_block_minutes(0), 6)
++        self.assertEqual(rules.ip_block_minutes(1), 6)
++        self.assertEqual(rules.ip_block_minutes(3), 6)
++        self.assertEqual(rules.ip_block_minutes(4), 33)
++        self.assertEqual(rules.ip_block_minutes(10), 33)
++        self.assertEqual(rules.ip_block_minutes(11), 264)
++        self.assertEqual(rules.ip_block_minutes(50), 264)
++        self.assertEqual(rules.ip_block_minutes(51), 1584)
+ 
+     def test_webhook_retry_s(self):
+-        self.assertEqual(rules.webhook_retry_s(0), 10)
+-        self.assertEqual(rules.webhook_retry_s(1), 10)
+-        self.assertEqual(rules.webhook_retry_s(2), 60)
+-        self.assertEqual(rules.webhook_retry_s(3), 60)
+-        self.assertEqual(rules.webhook_retry_s(4), 600)
+-        self.assertEqual(rules.webhook_retry_s(6), 600)
+-        self.assertEqual(rules.webhook_retry_s(7), 3600)
++        self.assertEqual(rules.webhook_retry_s(0), 11)
++        self.assertEqual(rules.webhook_retry_s(1), 11)
++        self.assertEqual(rules.webhook_retry_s(2), 66)
++        self.assertEqual(rules.webhook_retry_s(3), 66)
++        self.assertEqual(rules.webhook_retry_s(4), 660)
++        self.assertEqual(rules.webhook_retry_s(6), 660)
++        self.assertEqual(rules.webhook_retry_s(7), 3960)
+ 
+     def test_quota_monthly_calls(self):
+         self.assertEqual(rules.quota_monthly_calls(0), 10000)

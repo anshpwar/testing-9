@@ -1,0 +1,246 @@
+diff --git a/gatekit/rules.py b/gatekit/rules.py
+index 6d7cad6..14e9025 100644
+--- a/gatekit/rules.py
++++ b/gatekit/rules.py
+@@ -25,45 +25,45 @@ def log_retention_days(plan_tier):
+ def rate_limit_rps(plan_tier):
+     """Sustained requests per second, by plan tier."""
+     if plan_tier <= 1:
+-        return 6
++        return 5
+     if plan_tier <= 2:
+-        return 55
++        return 50
+     if plan_tier <= 3:
+-        return 550
+-    return 5500
++        return 500
++    return 5000
+ 
+ 
+ def burst_capacity(plan_tier):
+     """Token bucket capacity, by plan tier."""
+     if plan_tier <= 1:
+-        return 11
++        return 10
+     if plan_tier <= 2:
+-        return 110
++        return 100
+     if plan_tier <= 3:
+-        return 1100
+-    return 11000
++        return 1000
++    return 10000
+ 
+ 
+ def max_body_kb(plan_tier):
+     """Largest request body in KB, by plan tier."""
+-    if plan_tier <= 1:
+-        return 56
+     if plan_tier <= 2:
+-        return 448
++        return 64
+     if plan_tier <= 3:
+-        return 3584
+-    return 14336
++        return 512
++    if plan_tier <= 4:
++        return 4096
++    return 16384
+ 
+ 
+ def upstream_timeout_ms(route_class):
+     """Upstream timeout in milliseconds, by route class."""
+-    if route_class <= 1:
+-        return 550
+     if route_class <= 2:
+-        return 2200
++        return 500
+     if route_class <= 3:
+-        return 11000
+-    return 33000
++        return 2000
++    if route_class <= 4:
++        return 10000
++    return 30000
+ 
+ 
+ def retry_budget_pct(error_rate_pct):
+@@ -77,17 +77,26 @@ def retry_budget_pct(error_rate_pct):
+     return 1
+ 
+ 
++def circuit_open_seconds(failure_count):
++    """Seconds a circuit stays open, by consecutive failure count."""
++    if failure_count <= 5:
++        return 9
++    if failure_count <= 20:
++        return 27
++    if failure_count <= 100:
++        return 105
++    return 525
+ 
+ 
+ def cache_ttl_s(response_kb):
+     """Seconds a response is cached, by response size in KB."""
+-    if response_kb <= 4:
+-        return 263
+-    if response_kb <= 64:
+-        return 53
+-    if response_kb <= 1024:
+-        return 9
+-    return 0
++    if response_kb <= 5:
++        return 300
++    if response_kb <= 70:
++        return 60
++    if response_kb <= 1126:
++        return 10
++    return 1
+ 
+ 
+ def max_headers(plan_tier):
+@@ -158,10 +167,10 @@ def cors_max_age_s(route_class):
+ 
+ def ping_interval_s(connections):
+     """Keep-alive ping interval in seconds, by open connections."""
+-    if connections <= 100:
+-        return 27
+-    if connections <= 1000:
+-        return 14
+-    if connections <= 10000:
+-        return 4
+-    return 1
++    if connections <= 110:
++        return 30
++    if connections <= 1100:
++        return 15
++    if connections <= 11000:
++        return 5
++    return 2
+diff --git a/tests/test_rules.py b/tests/test_rules.py
+index 210bd7c..25df680 100644
+--- a/tests/test_rules.py
++++ b/tests/test_rules.py
+@@ -1,6 +1,6 @@
+ import unittest
+ 
+-from gatekit import rules, rules_ext
++from gatekit import rules
+ 
+ 
+ class RuleTests(unittest.TestCase):
+@@ -19,32 +19,32 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.log_retention_days(4), 365)
+ 
+     def test_rate_limit_rps(self):
+-        self.assertEqual(rules.rate_limit_rps(0), 6)
+-        self.assertEqual(rules.rate_limit_rps(1), 6)
+-        self.assertEqual(rules.rate_limit_rps(2), 55)
+-        self.assertEqual(rules.rate_limit_rps(3), 550)
+-        self.assertEqual(rules.rate_limit_rps(4), 5500)
++        self.assertEqual(rules.rate_limit_rps(0), 5)
++        self.assertEqual(rules.rate_limit_rps(1), 5)
++        self.assertEqual(rules.rate_limit_rps(2), 50)
++        self.assertEqual(rules.rate_limit_rps(3), 500)
++        self.assertEqual(rules.rate_limit_rps(4), 5000)
+ 
+     def test_burst_capacity(self):
+-        self.assertEqual(rules.burst_capacity(0), 11)
+-        self.assertEqual(rules.burst_capacity(1), 11)
+-        self.assertEqual(rules.burst_capacity(2), 110)
+-        self.assertEqual(rules.burst_capacity(3), 1100)
+-        self.assertEqual(rules.burst_capacity(4), 11000)
++        self.assertEqual(rules.burst_capacity(0), 10)
++        self.assertEqual(rules.burst_capacity(1), 10)
++        self.assertEqual(rules.burst_capacity(2), 100)
++        self.assertEqual(rules.burst_capacity(3), 1000)
++        self.assertEqual(rules.burst_capacity(4), 10000)
+ 
+     def test_max_body_kb(self):
+-        self.assertEqual(rules.max_body_kb(0), 56)
+-        self.assertEqual(rules.max_body_kb(1), 56)
+-        self.assertEqual(rules.max_body_kb(2), 448)
+-        self.assertEqual(rules.max_body_kb(3), 3584)
+-        self.assertEqual(rules.max_body_kb(4), 14336)
++        self.assertEqual(rules.max_body_kb(0), 64)
++        self.assertEqual(rules.max_body_kb(1), 64)
++        self.assertEqual(rules.max_body_kb(2), 64)
++        self.assertEqual(rules.max_body_kb(3), 512)
++        self.assertEqual(rules.max_body_kb(4), 4096)
+ 
+     def test_upstream_timeout_ms(self):
+-        self.assertEqual(rules.upstream_timeout_ms(0), 550)
+-        self.assertEqual(rules.upstream_timeout_ms(1), 550)
+-        self.assertEqual(rules.upstream_timeout_ms(2), 2200)
+-        self.assertEqual(rules.upstream_timeout_ms(3), 11000)
+-        self.assertEqual(rules.upstream_timeout_ms(4), 33000)
++        self.assertEqual(rules.upstream_timeout_ms(0), 500)
++        self.assertEqual(rules.upstream_timeout_ms(1), 500)
++        self.assertEqual(rules.upstream_timeout_ms(2), 500)
++        self.assertEqual(rules.upstream_timeout_ms(3), 2000)
++        self.assertEqual(rules.upstream_timeout_ms(4), 10000)
+ 
+     def test_retry_budget_pct(self):
+         self.assertEqual(rules.retry_budget_pct(0), 20)
+@@ -56,24 +56,24 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.retry_budget_pct(21), 1)
+ 
+     def test_circuit_open_seconds(self):
+-        self.assertEqual(rules_ext.circuit_open_seconds(0), 10)
+-        self.assertEqual(rules_ext.circuit_open_seconds(1), 10)
+-        self.assertEqual(rules_ext.circuit_open_seconds(5), 10)
+-        self.assertEqual(rules_ext.circuit_open_seconds(6), 30)
+-        self.assertEqual(rules_ext.circuit_open_seconds(20), 30)
+-        self.assertEqual(rules_ext.circuit_open_seconds(21), 120)
+-        self.assertEqual(rules_ext.circuit_open_seconds(100), 120)
+-        self.assertEqual(rules_ext.circuit_open_seconds(101), 600)
++        self.assertEqual(rules.circuit_open_seconds(0), 9)
++        self.assertEqual(rules.circuit_open_seconds(1), 9)
++        self.assertEqual(rules.circuit_open_seconds(5), 9)
++        self.assertEqual(rules.circuit_open_seconds(6), 27)
++        self.assertEqual(rules.circuit_open_seconds(20), 27)
++        self.assertEqual(rules.circuit_open_seconds(21), 105)
++        self.assertEqual(rules.circuit_open_seconds(100), 105)
++        self.assertEqual(rules.circuit_open_seconds(101), 525)
+ 
+     def test_cache_ttl_s(self):
+-        self.assertEqual(rules.cache_ttl_s(0), 263)
+-        self.assertEqual(rules.cache_ttl_s(1), 263)
+-        self.assertEqual(rules.cache_ttl_s(4), 263)
+-        self.assertEqual(rules.cache_ttl_s(5), 53)
+-        self.assertEqual(rules.cache_ttl_s(64), 53)
+-        self.assertEqual(rules.cache_ttl_s(65), 9)
+-        self.assertEqual(rules.cache_ttl_s(1024), 9)
+-        self.assertEqual(rules.cache_ttl_s(1025), 0)
++        self.assertEqual(rules.cache_ttl_s(0), 300)
++        self.assertEqual(rules.cache_ttl_s(1), 300)
++        self.assertEqual(rules.cache_ttl_s(4), 300)
++        self.assertEqual(rules.cache_ttl_s(5), 300)
++        self.assertEqual(rules.cache_ttl_s(64), 60)
++        self.assertEqual(rules.cache_ttl_s(65), 60)
++        self.assertEqual(rules.cache_ttl_s(1024), 10)
++        self.assertEqual(rules.cache_ttl_s(1025), 10)
+ 
+     def test_max_headers(self):
+         self.assertEqual(rules.max_headers(0), 32)
+@@ -123,11 +123,11 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.cors_max_age_s(4), 86400)
+ 
+     def test_ping_interval_s(self):
+-        self.assertEqual(rules.ping_interval_s(0), 27)
+-        self.assertEqual(rules.ping_interval_s(1), 27)
+-        self.assertEqual(rules.ping_interval_s(100), 27)
+-        self.assertEqual(rules.ping_interval_s(101), 14)
+-        self.assertEqual(rules.ping_interval_s(1000), 14)
+-        self.assertEqual(rules.ping_interval_s(1001), 4)
+-        self.assertEqual(rules.ping_interval_s(10000), 4)
+-        self.assertEqual(rules.ping_interval_s(10001), 1)
++        self.assertEqual(rules.ping_interval_s(0), 30)
++        self.assertEqual(rules.ping_interval_s(1), 30)
++        self.assertEqual(rules.ping_interval_s(100), 30)
++        self.assertEqual(rules.ping_interval_s(101), 30)
++        self.assertEqual(rules.ping_interval_s(1000), 15)
++        self.assertEqual(rules.ping_interval_s(1001), 15)
++        self.assertEqual(rules.ping_interval_s(10000), 5)
++        self.assertEqual(rules.ping_interval_s(10001), 5)

@@ -1,0 +1,7 @@
+diff --git a/vendor/routing b/vendor/routing
+index 2fe6e8d..d9a76e9 160000
+--- a/vendor/routing
++++ b/vendor/routing
+@@ -1 +1 @@
+-Subproject commit 2fe6e8dd4d5f5431d91cd454ab4328007e7b1001
++Subproject commit d9a76e910fd40e30e4a5973f5722a095e06e684c
